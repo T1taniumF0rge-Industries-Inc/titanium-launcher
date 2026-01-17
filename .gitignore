@@ -1,35 +1,31 @@
-<<<<<<< HEAD
+# --- Titanium Specific ---
 node_modules/
+dist/
+dist-ssr/
 src-tauri/target/
 src-tauri/gen/
-dist/
+binaries/
+*.local
 .env
+
+# --- Editor & IDEs ---
 .vscode/*
 !.vscode/settings.json
-*.log
-=======
-# Logs
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.sln
+*.suo
+*.sw?
+
+# --- Logs ---
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# --- OS Junk ---
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
->>>>>>> 8dcfe71 (First Source Code)
+Thumbs.db
