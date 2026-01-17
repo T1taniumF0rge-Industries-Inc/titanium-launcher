@@ -1,0 +1,8 @@
+node_modules/
+src-tauri/target/
+src-tauri/gen/
+dist/
+.env
+.vscode/*
+!.vscode/settings.json
+*.log
