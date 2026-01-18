@@ -1,4 +1,4 @@
-name: "Titanium Pipeline"
+name: "Release"
 on:
   push:
     tags:
@@ -8,22 +8,30 @@ jobs:
   publish:
     permissions:
       contents: write
+    runs-on: ${{ matrix.platform }}
     strategy:
       fail-fast: false
       matrix:
         platform: [macos-latest, windows-latest]
-    runs-on: ${{ matrix.platform }}
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: dtolnay/rust-toolchain@stable
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
+
       - run: npm install
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: v__VERSION__
-          releaseName: "Titanium v__VERSION__"
-          args: ${{ matrix.platform == 'windows-latest' && '--bundle exe' || '--bundle app' }}
+          releaseName: "Titanium Launcher v__VERSION__"
